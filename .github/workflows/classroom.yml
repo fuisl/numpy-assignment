@@ -16,8 +16,8 @@ jobs:
 
       - name: Install dependencies
         run: |
-        pip install pytest
-        pip install jupyter
+          pip install pytest
+          pip install jupyter
 
 
       - name: Convert Jupyter Notebook to Python
