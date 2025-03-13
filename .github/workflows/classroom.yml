@@ -1,5 +1,4 @@
-name: Autograding Tests
-'on':
+name: Autograding 'on':
   - push
   - repository_dispatch
 permissions:
@@ -7,7 +6,7 @@ permissions:
   actions: read
   contents: read
 jobs:
-  run-autograding-tests:
+  run-autograding-
     runs-on: ubuntu-latest
     if: github.actor != 'github-classroom[bot]'
     steps:
@@ -19,16 +18,17 @@ jobs:
           pip install pytest
           pip install jupyter
 
-
       - name: Convert Jupyter Notebook to Python
         run: jupyter nbconvert --to python exercises.ipynb
+
+      - run: ls -l exercises.py
 
       - name: Run Test 1 (Exercise 1)
         id: test-1
         uses: classroom-resources/autograding-python-grader@v1
         with:
           setup-command: ""
-          command: pytest -q --tb=short tests/test_exercises.py -k test_exercise_1
+          command: pytest -q --tb=short test_exercises.py -k test_exercise_1
           timeout: 10
           max-score: 20  # Weight for Exercise 1
 
@@ -37,7 +37,7 @@ jobs:
         uses: classroom-resources/autograding-python-grader@v1
         with:
           setup-command: ""
-          command: pytest -q --tb=short tests/test_exercises.py -k test_exercise_2
+          command: pytest -q --tb=short test_exercises.py -k test_exercise_2
           timeout: 10
           max-score: 15  # Weight for Exercise 2
 
@@ -46,7 +46,7 @@ jobs:
         uses: classroom-resources/autograding-python-grader@v1
         with:
           setup-command: ""
-          command: pytest -q --tb=short tests/test_exercises.py -k test_exercise_3
+          command: pytest -q --tb=short test_exercises.py -k test_exercise_3
           timeout: 10
           max-score: 25  # Weight for Exercise 3
 
@@ -55,7 +55,7 @@ jobs:
         uses: classroom-resources/autograding-python-grader@v1
         with:
           setup-command: ""
-          command: pytest -q --tb=short tests/test_exercises.py -k test_exercise_4
+          command: pytest -q --tb=short test_exercises.py -k test_exercise_4
           timeout: 10
           max-score: 10  # Weight for Exercise 4
 
@@ -64,7 +64,7 @@ jobs:
         uses: classroom-resources/autograding-python-grader@v1
         with:
           setup-command: ""
-          command: pytest -q --tb=short tests/test_exercises.py -k test_exercise_5
+          command: pytest -q --tb=short test_exercises.py -k test_exercise_5
           timeout: 10
           max-score: 30  # Weight for Exercise 5
 
