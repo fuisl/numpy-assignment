@@ -1,4 +1,5 @@
-name: Autograding 'on':
+name: Autograding Tests
+'on':
   - push
   - repository_dispatch
 permissions:
@@ -6,7 +7,7 @@ permissions:
   actions: read
   contents: read
 jobs:
-  run-autograding-
+  run-autograding-tests:
     runs-on: ubuntu-latest
     if: github.actor != 'github-classroom[bot]'
     steps:
