@@ -1,4 +1,6 @@
-import pytest
+# import pytest
+import numpy as np
+import pandas as pd
 
 from exercises import exercise_1, exercise_2, exercise_3, exercise_4, exercise_5
 
@@ -12,7 +14,17 @@ def test_exercise_3():
     assert exercise_3([1, 2, 3]) == [3, 2, 1]  # Example case
 
 def test_exercise_4():
-    assert exercise_4(10) == 100  # Modify accordingly
+    data = pd.DataFrame({
+        "Col1" : [1, 2, 3],
+        "Col2" : [3, 2, 1]
+    })
+    res = pd.DataFrame({
+        "Col1" : [6],
+        "Col2" : [6]
+    })
+    assert exercise_4(data).equals(res) # Modify accordingly
 
 def test_exercise_5():
-    assert exercise_5("test") == "tset"  # Modify accordingly
+    res = exercise_5([1, 2, 3])
+    assert isinstance(res, np.ndarray)
+    assert (res==np.ndarray([1,2,3])).all() # Modify accordingly
