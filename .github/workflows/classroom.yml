@@ -38,7 +38,10 @@ jobs:
         id: numpy
         uses: FAU-CS6-KDDmUe-Submissions/Custom-Python-Autograder@v1
         with:
-          setup-command: 'source .venv/bin/activate && pip install -r requirements.txt'
+          setup-command: |
+            python -m venv .venv
+            source .venv/bin/activate
+            pip install -r requirements.txt
           timeout: 10
           max-score: 100
           test-path: 'answer/test_exercises.py'
