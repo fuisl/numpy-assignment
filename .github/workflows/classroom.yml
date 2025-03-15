@@ -15,7 +15,7 @@ jobs:
 
       - name: Install dependencies
         run: |
-            pip install --no-deps jupyter-core traitlets nbconvert nbformat fastjsonschema pandocfilters testresources defusedxml jupyter-client jupyterlab-pygments mistune nbclient nest-asyncio notebook prometheus-client pygments testpath
+            pip install jupyter
 
       - name: Export Python file
         run: |
@@ -29,7 +29,7 @@ jobs:
         uses: FAU-CS6-KDDmUe-Submissions/Custom-Python-Autograder@v1
         with:
           setup-command: |
-            pip install --no-deps -r requirements.txt
+            pip install -r requirements.txt
           max-score: 100
           test-path: 'answer/test_exercises.py'
 
