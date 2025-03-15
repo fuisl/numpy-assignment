@@ -15,7 +15,7 @@ jobs:
 
       - name: Install dependencies
         run: |
-          pip install --no-deps jupyter-core traitlets nbconvert
+          pip install --no-deps jupyter-core traitlets nbconvert nbformat
 
       - name: Export Python file
         run: |
