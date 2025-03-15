@@ -25,7 +25,6 @@ def test_exercise_4():
     assert exercise_4(data).equals(res) # Modify accordingly
 
 def test_exercise_5():
-    def solution(l):
-        pass
+    res = exercise_5([1, 2, 3])
     assert isinstance(res, np.ndarray)
-    assert (exercise_5(rand)==solution(rand)) # Modify accordingly
+    assert (res==np.ndarray([1,2,3])).all() # Modify accordingly
