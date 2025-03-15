@@ -37,7 +37,7 @@ jobs:
           test-path: 'test_exercises.py'
 
       - name: Autograding Reporter
-        uses: classroom-resources/autograding-grading-reporter@v1
+        uses: fuisl/autograding-grading-reporter@v1
         env:
           NUMPY_RESULTS: "${{steps.numpy.outputs.result}}"
         with:
