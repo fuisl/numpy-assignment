@@ -15,7 +15,7 @@ jobs:
 
       - name: Install dependencies
         run: |
-          pip install --no-deps jupyter-core traitlets nbconvert nbformat fastjsonschema
+            pip install --no-deps jupyter-core traitlets nbconvert nbformat fastjsonschema pandocfilters testresources defusedxml jupyter-client jupyterlab-pygments mistune nbclient nest-asyncio notebook prometheus-client pygments testpath
 
       - name: Export Python file
         run: |
