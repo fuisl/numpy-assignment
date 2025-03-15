@@ -11,27 +11,36 @@ jobs:
     if: github.actor != 'github-classroom[bot]'
     steps:
       - uses: actions/checkout@v4
-      - uses: actions/cache@v4
-        id: cache-deps
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
         with:
-          path: ~/.cache/pip
-          key: ${{ runner.os }}-pip-${{ hashFiles('**/requirements.txt') }}
-          restore-keys: |
-            ${{ runner.os }}-pip-
+          python-version: '3.8'  # Specify your desired Python version
+
+      - name: Restore cached virtual environment
+        id: cache-venv
+        uses: actions/cache@v4
+        with:
+          path: .venv
+          key: venv-${{ runner.os }}-${{ hashFiles('requirements.txt') }}
 
       - name: Install dependencies
-        if: steps.cache-deps.outputs.cache-hit != 'true'
         run: |
-          pip install jupyter
+          python -m venv .venv
+          source .venv/bin/activate
+          pip install -r requirements.txt
+        if: steps.cache-venv.outputs.cache-hit != 'true'
 
       - name: Convert Jupyter Notebook to Python
-        run: jupyter nbconvert --to python exercises.ipynb
-      
+        run: |
+          source .venv/bin/activate
+          jupyter nbconvert --to python exercises.ipynb
+
       - name: Autograding
         id: numpy
         uses: FAU-CS6-KDDmUe-Submissions/Custom-Python-Autograder@v1
         with:
-          setup-command: 'pip install -r requirements.txt'
+          setup-command: 'source .venv/bin/activate && pip install -r requirements.txt'
           timeout: 10
           max-score: 100
           test-path: 'test_exercises.py'
