@@ -16,7 +16,6 @@ jobs:
 
       - name: Install dependencies
         run: |
-          pip install pytest
           pip install jupyter
 
       - name: Convert Jupyter Notebook to Python
@@ -25,57 +24,16 @@ jobs:
       - run: ls -l exercises.py
 
       - name: Run Test 1 (Exercise 1)
-        id: test-1
+        id: test
         uses: classroom-resources/autograding-python-grader@v1
         with:
           setup-command: ""
-          command: pytest -q test_exercises.py -k test_exercise_1
           timeout: 10
-          max-score: 20  # Weight for Exercise 1
-
-      - name: Run Test 2 (Exercise 2)
-        id: test-2
-        uses: classroom-resources/autograding-python-grader@v1
-        with:
-          setup-command: ""
-          command: pytest -q test_exercises.py -k test_exercise_2
-          timeout: 10
-          max-score: 15  # Weight for Exercise 2
-
-      - name: Run Test 3 (Exercise 3)
-        id: test-3
-        uses: classroom-resources/autograding-python-grader@v1
-        with:
-          setup-command: ""
-          command: pytest -q test_exercises.py -k test_exercise_3
-          timeout: 10
-          max-score: 25  # Weight for Exercise 3
-
-      - name: Run Test 4 (Exercise 4)
-        id: test-4
-        uses: classroom-resources/autograding-python-grader@v1
-        with:
-          setup-command: ""
-          command: pytest -q test_exercises.py -k test_exercise_4
-          timeout: 10
-          max-score: 10  # Weight for Exercise 4
-
-      - name: Run Test 5 (Exercise 5)
-        id: test-5
-        uses: classroom-resources/autograding-python-grader@v1
-        with:
-          setup-command: ""
-          command: pytest -q test_exercises.py -k test_exercise_5
-          timeout: 10
-          max-score: 30  # Weight for Exercise 5
+          max-score: 100  # Weight for Exercise 1
 
       - name: Autograding Reporter
         uses: classroom-resources/autograding-grading-reporter@v1
         env:
-          TEST-1_RESULTS: "${{steps.test-1.outputs.result}}"
-          TEST-2_RESULTS: "${{steps.test-2.outputs.result}}"
-          TEST-3_RESULTS: "${{steps.test-3.outputs.result}}"
-          TEST-4_RESULTS: "${{steps.test-4.outputs.result}}"
-          TEST-5_RESULTS: "${{steps.test-5.outputs.result}}"
+          TEST_RESULTS: "${{steps.test.outputs.result}}"
         with:
           runners: test-1, test-2, test-3, test-4, test-5
