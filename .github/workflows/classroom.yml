@@ -36,6 +36,9 @@ jobs:
           source .venv/bin/activate
           jupyter nbconvert --to python exercises.ipynb
 
+      - name: Clone answer repo
+        run: git clone https://github.com/nhientruong04/test_action.git answer
+
       - name: Autograding
         id: numpy
         uses: FAU-CS6-KDDmUe-Submissions/Custom-Python-Autograder@v1
@@ -43,7 +46,7 @@ jobs:
           setup-command: 'source .venv/bin/activate && pip install -r requirements.txt'
           timeout: 10
           max-score: 100
-          test-path: 'test_exercises.py'
+          test-path: 'answer/test_exercises.py'
 
       - name: Autograding Reporter
         uses: fuisl/autograding-grading-reporter@v1
