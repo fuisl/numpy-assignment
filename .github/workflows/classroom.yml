@@ -1,7 +1,6 @@
 name: Autograding Tests
 'on':
   - push
-  - repository_dispatch
 permissions:
   checks: write
   actions: read
@@ -23,11 +22,12 @@ jobs:
 
       - name: Run Test
         id: test
-        uses: classroom-resources/autograding-python-grader@v1
+        uses: FAU-CS6-KDDmUe-Submissions/Custom-Python-Autograder@v1
         with:
           setup-command: ""
           timeout: 10
           max-score: 100  # Weight for Exercise 1
+          test-path: 'test_exercises.py'
 
       - name: Autograding Reporter
         uses: classroom-resources/autograding-grading-reporter@v1
