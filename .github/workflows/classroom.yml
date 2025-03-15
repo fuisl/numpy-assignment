@@ -3,8 +3,8 @@ name: Autograding Tests
   - push
 permissions:
   checks: write
-  actions: write
-  contents: write
+  actions: read
+  contents: read
 jobs:
   run-autograding-tests:
     runs-on: ubuntu-latest
