@@ -10,12 +10,19 @@ jobs:
     runs-on: ubuntu-latest
     if: github.actor != 'github-classroom[bot]'
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
+      - uses: actions/checkout@v4
+      - uses: actions/cache@v4
+        id: cache-deps
+        with:
+          path: ~/.cache/pip
+          key: ${{ runner.os }}-pip-${{ hashFiles('**/requirements.txt') }}
+          restore-keys: |
+            ${{ runner.os }}-pip-
 
       - name: Install dependencies
+        if: steps.cache-deps.outputs.cache-hit != 'true'
         run: |
-          pip install -q jupyter
+          pip install jupyter
 
       - name: Convert Jupyter Notebook to Python
         run: jupyter nbconvert --to python exercises.ipynb
@@ -24,9 +31,9 @@ jobs:
         id: test
         uses: FAU-CS6-KDDmUe-Submissions/Custom-Python-Autograder@v1
         with:
-          setup-command: ""
+          setup-command: 'pip install -r requirements.txt'
           timeout: 10
-          max-score: 100  # Weight for Exercise 1
+          max-score: 100
           test-path: 'test_exercises.py'
 
       - name: Autograding Reporter
