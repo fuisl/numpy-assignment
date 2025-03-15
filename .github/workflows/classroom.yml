@@ -21,7 +21,7 @@ jobs:
           
       - name: Install dependencies
         run: |
-          pip install -q jupyter numpy pandas
+          pip install -q -r requirements.txt
 
       - name: Convert Jupyter Notebook to Python
         run: jupyter nbconvert --to python exercises.ipynb
