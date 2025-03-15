@@ -39,6 +39,6 @@ jobs:
       - name: Autograding Reporter
         uses: classroom-resources/autograding-grading-reporter@v1
         env:
-          TEST_RESULTS: "${{steps.test.outputs.result}}"
+          TEST_RESULTS: "${{steps.numpy.outputs.result}}"
         with:
           runners: numpy
