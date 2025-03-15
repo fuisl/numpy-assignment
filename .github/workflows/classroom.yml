@@ -20,15 +20,15 @@ jobs:
           key: venv-${{ runner.os }}-${{ hashFiles('requirements.txt') }}
 
       - name: Install dependencies
+        if: steps.cache-venv.outputs.cache-hit != 'true'
         run: |
           python -m venv .venv
-          source .venv/bin/activate
+          . .venv/bin/activate
           pip install -r requirements.txt
-        if: steps.cache-venv.outputs.cache-hit != 'true'
 
       - name: Convert Jupyter Notebook to Python
         run: |
-          source .venv/bin/activate
+          . .venv/bin/activate
           jupyter nbconvert --to python exercises.ipynb
 
       - name: Clone answer repo
@@ -39,9 +39,7 @@ jobs:
         uses: FAU-CS6-KDDmUe-Submissions/Custom-Python-Autograder@v1
         with:
           setup-command: |
-            python -m venv .venv
-            source .venv/bin/activate
-            pip install -r requirements.txt
+            . .venv/bin/activate
           timeout: 10
           max-score: 100
           test-path: 'answer/test_exercises.py'
