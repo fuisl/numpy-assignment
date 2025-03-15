@@ -5,8 +5,8 @@ ex1_sol = 5
 ex2_sol = "UPPERCASE"
 ex3_sol = [3, 2, 1]
 ex4_sol = pd.Series({
-        "Col1" : [6],
-        "Col2" : [6]
+        "Col1" : 6,
+        "Col2" : 6
     })
 ex5_sol = np.array([1,2,3])
 
