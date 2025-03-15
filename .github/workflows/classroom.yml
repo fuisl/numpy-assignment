@@ -26,9 +26,9 @@ jobs:
 
       - name: Convert Jupyter Notebook to Python
         run: jupyter nbconvert --to python exercises.ipynb
-
-      - name: Run Test
-        id: test
+      
+      - name: Autograding
+        id: numpy
         uses: FAU-CS6-KDDmUe-Submissions/Custom-Python-Autograder@v1
         with:
           setup-command: 'pip install -r requirements.txt'
@@ -41,4 +41,4 @@ jobs:
         env:
           TEST_RESULTS: "${{steps.test.outputs.result}}"
         with:
-          runners: test
+          runners: numpy
