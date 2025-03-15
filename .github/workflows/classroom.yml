@@ -10,28 +10,18 @@ jobs:
     runs-on: ubuntu-latest
     if: github.actor != 'github-classroom[bot]'
     steps:
-      - uses: actions/checkout@v4
-
-      - name: Restore cached virtual environment
-        id: cache-venv
-        uses: actions/cache@v4
-        with:
-          path: .venv
-          key: venv-${{ runner.os }}-${{ hashFiles('requirements.txt') }}
+      - name: Checkout repository
+        uses: actions/checkout@v4
 
       - name: Install dependencies
-        if: steps.cache-venv.outputs.cache-hit != 'true'
         run: |
-          python -m venv .venv
-          . .venv/bin/activate
-          pip install -r requirements.txt
+          pip install --no-deps jupyter-core traitlets nbconvert
 
-      - name: Convert Jupyter Notebook to Python
+      - name: Export Python file
         run: |
-          . .venv/bin/activate
           jupyter nbconvert --to python exercises.ipynb
 
-      - name: Clone answer repo
+      - name: Checkout tests
         run: git clone https://github.com/nhientruong04/test_action.git answer
 
       - name: Autograding
@@ -39,9 +29,7 @@ jobs:
         uses: FAU-CS6-KDDmUe-Submissions/Custom-Python-Autograder@v1
         with:
           setup-command: |
-            . .venv/bin/activate
-            pip install -r requirements.txt
-            pytest --maxfail=1 --disable-warnings answer/test_exercises.py
+            pip install --no-deps -r requirements.txt
           max-score: 100
           test-path: 'answer/test_exercises.py'
 
