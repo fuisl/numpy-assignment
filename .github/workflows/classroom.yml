@@ -48,6 +48,6 @@ jobs:
           NUMPY_RESULTS: "${{steps.numpy.outputs.result}}"
         with:
           runners: numpy
-# I don't even know what I'm doing
+# I don't even know what I'm doing right now
       - name: Comment bot
         run: cml comment create comment.md
