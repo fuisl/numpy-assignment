@@ -15,6 +15,9 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
+      - name: Set up comment bot
+        uses: iterative/setup-cml@v1
+
       - name: Install dependencies
         run: |
             pip install jupyter
@@ -36,8 +39,11 @@ jobs:
           test-path: 'answer/test_exercises.py'
 
       - name: Autograding Reporter
-        uses: fuisl/autograding-grading-reporter@v1
+        uses: fuisl/autograding-grading-reporter@releases/v1
         env:
           NUMPY_RESULTS: "${{steps.numpy.outputs.result}}"
         with:
           runners: numpy
+
+      - name: Comment bot
+        run: cml comment create comment.md
