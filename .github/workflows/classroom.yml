@@ -41,20 +41,18 @@ jobs:
           max-score: 100
           test-path: 'answer/test_exercises.py'
 
-      - run: ls -R
-
-      - env:
-          REPO_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: |
-          echo 'Im dead frfr' >> comment.md
-          cml comment create --publish comment.md
-
       - name: Autograding Reporter
         uses: fuisl/autograding-grading-reporter@v1.1
         env:
           NUMPY_RESULTS: "${{steps.numpy.outputs.result}}"
         with:
           runners: numpy
+
+      - env:
+          REPO_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          echo 'Im dead frfr' >> comment.md
+          cml comment create --publish comment.md
 # I don't even know what I'm doing right now
       # - name: Comment bot
       #   env:
