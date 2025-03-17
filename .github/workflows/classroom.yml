@@ -47,7 +47,6 @@ jobs:
           NUMPY_RESULTS: "${{steps.numpy.outputs.result}}"
         with:
           runners: numpy
-
       # - env:
       #     REPO_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       #   run: |
