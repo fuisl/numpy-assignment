@@ -15,12 +15,11 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      - uses: actions/setup-node@v3
-        with:
-          node-version: 16
-
       - name: Set up comment bot
-        uses: iterative/setup-cml@v1
+        uses: iterative/setup-cml@v2
+        with:
+          version: 'v0.20.0'
+          vega: false
 
       - name: Install dependencies
         run: |
