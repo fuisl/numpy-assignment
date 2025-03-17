@@ -48,18 +48,18 @@ jobs:
         with:
           runners: numpy
 
-      - env:
-          REPO_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: |
-          echo 'Im dead frfr' >> comment.md
-          cml comment create --publish comment.md
-# I don't even know what I'm doing right now
-      # - name: Comment bot
-      #   env:
+      # - env:
       #     REPO_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       #   run: |
-      #     if [ -f comment.md ]; then
-      #       cml comment create comment.md
-      #     else
-      #       echo "comment.md not found!"
-      #     fi
+      #     echo 'Im dead frfr' >> comment.md
+      #     cml comment create --publish comment.md
+# I don't even know what I'm doing right now
+      - name: Comment bot
+        env:
+          REPO_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          if [ -f comment.md ]; then
+            cml comment create comment.md
+          else
+            echo "comment.md not found!"
+          fi
