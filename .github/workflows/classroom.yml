@@ -50,4 +50,9 @@ jobs:
           runners: numpy
 # I don't even know what I'm doing right now
       - name: Comment bot
-        run: cml comment create comment.md
+        run: |
+          if [ -f comment.md ]; then
+            cml comment create comment.md
+          else
+            echo "comment.md not found!"
+          fi
