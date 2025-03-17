@@ -46,7 +46,7 @@ jobs:
       - env:
           REPO_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          echo '**I\'m dead frfr**' >> comment.md
+          echo 'Im dead frfr' >> comment.md
           cml comment create --publish comment.md
 
       - name: Autograding Reporter
