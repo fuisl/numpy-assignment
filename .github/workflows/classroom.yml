@@ -51,9 +51,4 @@ jobs:
       - name: Comment bot
         env:
           REPO_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: |
-          if [ -f comment.md ]; then
-            cml comment create comment.md
-          else
-            echo "comment.md not found!"
-          fi
+        run: echo "comment.md not found!"
