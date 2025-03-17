@@ -49,6 +49,8 @@ jobs:
           runners: numpy
 # I don't even know what I'm doing right now
       - name: Comment bot
+        env:
+          REPO_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           if [ -f comment.md ]; then
             cml comment create comment.md
